@@ -55,31 +55,57 @@ public class WaterAndMineral : MonoBehaviour
             randomPositionY = Random.Range(minimum_rand_y, maximum_rand_y);
             cell_pos = new Vector3Int(randomPositionX, randomPositionY);
 
-            if(Random.Range(0, 1) == 0)
+            // determining second box position
+            int leftRight = Random.Range(0, 1);
+
+            if(leftRight == 0)
             {
-                // left
+                // 2nd box will spawn to the left of the first
                 nextRandomPositionX = Random.Range(minimum_rand_x, randomPositionX - rand_distance_x - width);
             }
             else
             {
-                // right
+                // 2nd box will spawn to the right of the first
                 nextRandomPositionX = Random.Range(randomPositionX + rand_distance_x, maximum_rand_x);
             }
 
             if (Random.Range(0, 1) == 0)
             {
-                // up
+                // 2nd box up of the first
                 nextRandomPositionY = Random.Range(randomPositionY + rand_distance_y, maximum_rand_y);
             }
             else
             {
-                // down
+                // 2nd box down of the first
                 nextRandomPositionY = Random.Range(minimum_rand_y, randomPositionY - rand_distance_y - height);
             }
 
-            // nextRandomPositionX = Random.Range(randomPositionX - rand_distance_x, randomPositionX + rand_distance_x);
-            // nextRandomPositionY = Random.Range(randomPositionY - rand_distance_y, randomPositionY + rand_distance_y);
             next_cell_pos = new Vector3Int(nextRandomPositionX, nextRandomPositionY);
+
+            // determining 3rd box position
+            if (leftRight == 0)
+            {
+                // 3rd box will spawn to the right of the first
+                afterRandomPositionX = Random.Range(randomPositionX + rand_distance_x, maximum_rand_x);
+            }
+            else
+            {
+                // 3rd box will spawn to the left of the first
+                afterRandomPositionX = Random.Range(minimum_rand_x, randomPositionX - rand_distance_x - width);
+            }
+
+            if (Random.Range(0, 1) == 0)
+            {
+                // third box will spawn up of the first
+                afterRandomPositionY = Random.Range(randomPositionY + rand_distance_y, maximum_rand_y);
+            }
+            else
+            {
+                // third box will spawn down of the first
+                afterRandomPositionY = Random.Range(minimum_rand_y, randomPositionY - rand_distance_y - height);
+            }
+
+            after_cell_pos = new Vector3Int(afterRandomPositionX, afterRandomPositionY);
 
             DrawSquare(cell_pos);
         }
