@@ -531,6 +531,7 @@ GameObject:
   - component: {fileID: 1787713606}
   - component: {fileID: 1787713605}
   - component: {fileID: 1787713604}
+  - component: {fileID: 1787713607}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -580,6 +581,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1787713607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787713603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a79dcda70bba4845854897baccd5902, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 1002608415}
+  water: {fileID: 11400000, guid: db3a3b619e46bde4bb90d4aa6b45325f, type: 2}
+  minimum_rand_x: -53
+  maximum_rand_x: 51
+  minimum_rand_y: -30
+  maximum_rand_y: 14
+  rand_distance_x: 10
+  rand_distance_y: 10
+  registered_rand_x: 
+  registered_rand_y: 
 --- !u!1 &2117879256
 GameObject:
   m_ObjectHideFlags: 0

@@ -36,7 +36,7 @@ public class RootManager : MonoBehaviour
     {
         cell_pos = tilemap.WorldToCell(pos);
 
-        for (int x = -2; x < 3; x++)
+        for (int x = -2; x < 3; x++)    
         {
             for (int y = -2; y < 3; y++)
             {
