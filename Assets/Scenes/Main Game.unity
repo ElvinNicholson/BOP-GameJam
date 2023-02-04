@@ -599,8 +599,8 @@ MonoBehaviour:
   maximum_rand_x: 51
   minimum_rand_y: -30
   maximum_rand_y: 14
-  rand_distance_x: 10
-  rand_distance_y: 10
+  rand_distance_x: 25
+  rand_distance_y: 25
   registered_rand_x: 
   registered_rand_y: 
 --- !u!1 &2117879256
