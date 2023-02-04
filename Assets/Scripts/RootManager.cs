@@ -10,18 +10,19 @@ public class RootManager : MonoBehaviour
 
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private TileBase root;
+    [SerializeField] private TileBase water;
+    [SerializeField] private TileBase mineral;
+
     [SerializeField] private StaminaBar stamina;
 
     [SerializeField] private int max_stamina;
     private int current_stamina;
 
-    // Start is called before the first frame update
     private void Start()
     {
         current_stamina = max_stamina;
     }
 
-    // Update is called once per frame
     private void Update()
     {
         InputManager();
@@ -50,8 +51,18 @@ public class RootManager : MonoBehaviour
 
                 if (!(Mathf.Abs(x) == 2 && Mathf.Abs(y) == 2) && current_stamina > 0)
                 {
-                    if (!(tilemap.GetTile(tile_pos) == root))
+                    TileBase current_tile = tilemap.GetTile(tile_pos);
+                    if (!(current_tile == root))
                     {
+                        if (current_tile == water)
+                        {
+                            Debug.Log("FOUND WATER");
+                        }
+                        else if (current_tile == mineral)
+                        {
+                            Debug.Log("FOUND MINERAL");
+                        }
+
                         tilemap.SetTile(tile_pos, root);
 
                         current_stamina -= 1;
@@ -63,5 +74,10 @@ public class RootManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void ReplaceAdjacentTilesAs(Vector3Int tile_pos, TileBase old_tile, TileBase new_tile)
+    {
+
     }
 }
