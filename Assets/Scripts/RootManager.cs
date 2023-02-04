@@ -10,13 +10,15 @@ public class RootManager : MonoBehaviour
 
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private TileBase root;
+    [SerializeField] private StaminaBar stamina;
 
-    public int root_stamina;
+    [SerializeField] private int max_stamina;
+    private int current_stamina;
 
     // Start is called before the first frame update
     private void Start()
     {
-        
+        current_stamina = max_stamina;
     }
 
     // Update is called once per frame
@@ -44,14 +46,19 @@ public class RootManager : MonoBehaviour
         {
             for (int y = -2; y < 3; y++)
             {
-                Vector3Int tile_pos = cell_pos + new Vector3Int(x, y, 0);
+                Vector3Int tile_pos = pos + new Vector3Int(x, y, 0);
 
-                if (!(Mathf.Abs(x) == 2 && Mathf.Abs(y) == 2) && root_stamina > 0)
+                if (!(Mathf.Abs(x) == 2 && Mathf.Abs(y) == 2) && current_stamina > 0)
                 {
                     if (!(tilemap.GetTile(tile_pos) == root))
                     {
                         tilemap.SetTile(tile_pos, root);
-                        root_stamina -= 1;
+
+                        current_stamina -= 1;
+                        if (current_stamina > 0)
+                        {
+                            stamina.SetStamina((float)current_stamina / max_stamina);
+                        }
                     }
                 }
             }
