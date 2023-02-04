@@ -34,6 +34,9 @@ public class WaterAndMineral : MonoBehaviour
     private int afterRandomPositionX;
     private int afterRandomPositionY;
 
+    private int height = 6;
+    private int width = 11;
+
     [SerializeField] private List<int> registered_rand_x;
     [SerializeField] private List<int> registered_rand_y;
 
@@ -48,81 +51,35 @@ public class WaterAndMineral : MonoBehaviour
     {
         if(Input.GetKeyDown("e"))
         {
-
             randomPositionX = Random.Range(minimum_rand_x, maximum_rand_x);
             randomPositionY = Random.Range(minimum_rand_y, maximum_rand_y);
             cell_pos = new Vector3Int(randomPositionX, randomPositionY);
 
             if(Random.Range(0, 1) == 0)
             {
-                is_spawn_left = true;
+                // left
+                nextRandomPositionX = Random.Range(minimum_rand_x, randomPositionX - rand_distance_x - width);
             }
             else
             {
-                is_spawn_left = false;
+                // right
+                nextRandomPositionX = Random.Range(randomPositionX + rand_distance_x, maximum_rand_x);
             }
 
             if (Random.Range(0, 1) == 0)
             {
-                is_spawn_up = true;
-            }
-            else
-            {
-                is_spawn_up = false;
-            }
-
-            if (is_spawn_left == true)
-            {
-                //Gonna spawn somewhere to the Left of initial spawned Water.
-                nextRandomPositionX = Random.Range(minimum_rand_x, randomPositionX - rand_distance_x);
-            }
-            else
-            {
-                //Gonna spawn Right.
-                nextRandomPositionX = Random.Range(randomPositionX + rand_distance_x, maximum_rand_x);
-            }
-
-            if(is_spawn_up == true)
-            {
-                //Gonna spawn Up.
+                // up
                 nextRandomPositionY = Random.Range(randomPositionY + rand_distance_y, maximum_rand_y);
             }
             else
             {
-                //Gonna spawn Below.
-                nextRandomPositionY = Random.Range(minimum_rand_y, randomPositionY - rand_distance_y);
+                // down
+                nextRandomPositionY = Random.Range(minimum_rand_y, randomPositionY - rand_distance_y - height);
             }
 
-            nextRandomPositionX = Random.Range(randomPositionX - rand_distance_x, randomPositionX + rand_distance_x);
-            nextRandomPositionY = Random.Range(randomPositionY - rand_distance_y, randomPositionY + rand_distance_y);
+            // nextRandomPositionX = Random.Range(randomPositionX - rand_distance_x, randomPositionX + rand_distance_x);
+            // nextRandomPositionY = Random.Range(randomPositionY - rand_distance_y, randomPositionY + rand_distance_y);
             next_cell_pos = new Vector3Int(nextRandomPositionX, nextRandomPositionY);
-
-            //afterRandomPositionX = Random.Range(nextRandomPositionX - rand_distance_x, nextRandomPositionX + rand_distance_x);
-            //afterRandomPositionY = Random.Range(nextRandomPositionY - rand_distance_y, nextRandomPositionY + rand_distance_y);
-            //after_cell_pos = new Vector3Int(afterRandomPositionX, afterRandomPositionY);
-
-            ////Check if list is Empty
-            //if (registered_rand_x.Count == 0)
-            //{
-            //    //List is Empty.
-            //    cell_pos = new Vector3Int(randomPositionX, randomPositionY);
-            //    registered_rand_x.Add(randomPositionX);
-            //    registered_rand_x.Add(randomPositionX + distance_x);
-            //    registered_rand_x.Add(randomPositionX - distance_x);
-            //    registered_rand_x.Add(randomPositionY);
-            //    registered_rand_y.Add(randomPositionY + distance_y);
-            //    registered_rand_y.Add(randomPositionY - distance_y);
-            //}
-            //else
-            //{
-            //    //List is not Empty.
-            //    int id_x = registered_rand_x.IndexOf(randomPositionX);
-            //    int id_y = registered_rand_y.IndexOf(randomPositionY);
-            //
-            //    while
-            //
-            //}
-
 
             DrawSquare(cell_pos);
         }

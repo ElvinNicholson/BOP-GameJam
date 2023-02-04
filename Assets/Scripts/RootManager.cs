@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class RootManager : MonoBehaviour
 {
     private Vector3 mouse_pos;
-    private Vector3Int cell_pos;
+    [SerializeField] private Vector3Int cell_pos;
 
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private TileBase root;
