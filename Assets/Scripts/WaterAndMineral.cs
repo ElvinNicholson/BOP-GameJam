@@ -245,15 +245,29 @@ public class WaterAndMineral : MonoBehaviour
                 break;
         }
 
-        for (int x = 0; x < 11; x++) //3 //-2
+        for (int x = 0; x < 11; x++) //3 //-2 //Width must be 11
         {
-            for (int y = 0; y < 6; y++) //3 
+            for (int y = 0; y < 6; y++) //3 //Height must be 6
             {
-                tilemap.SetTile(cell_pos + new Vector3Int(x, y, 0), tileTypeToDraw);
+               // if(!(Mathf.Abs(x) == 0 && Mathf.Abs(y) == 0)
+               // && !(Mathf.Abs(x) == 1 && Mathf.Abs(y) == 0)
+               // && !(Mathf.Abs(x) == 0 && Mathf.Abs(y) == 1))
+               // {
+               //     tilemap.SetTile(cell_pos + new Vector3Int(x, y, 0), tileTypeToDraw);
+               // }
+                //tilemap.SetTile(cell_pos + new Vector3Int(x, y, 0), tileTypeToDraw);
+
+
+                if(!(Mathf.Abs(x) == 0 && (Mathf.Abs(y) == 0 || Mathf.Abs(y) == 1 || Mathf.Abs(y) == 4 || Mathf.Abs(y) == 5))
+                && !(Mathf.Abs(y) == 0 && (Mathf.Abs(x) == 1 || Mathf.Abs(x) == 9 || Mathf.Abs(x) == 10))
+                && !(Mathf.Abs(y) == 5 && (Mathf.Abs(x) == 1 || Mathf.Abs(x) == 9 || Mathf.Abs(x) == 10)) 
+                && !(Mathf.Abs(x) == 10 && (Mathf.Abs(y) == 1 || Mathf.Abs(y) == 4)) 
+                )
+                {
+                    tilemap.SetTile(cell_pos + new Vector3Int(x, y, 0), tileTypeToDraw);
+                }
             }
         }
-
-        //tilemap.SetTile(cell_pos, water);
     }
 
     private void DrawOrigin()
