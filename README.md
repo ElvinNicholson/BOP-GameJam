@@ -8,9 +8,8 @@ This project was created for the [Global Game Jam 2023](https://globalgamejam.or
 Built with [Unity](https://unity.com/) version 2022.1.16f1
 
 ## Setup
-```
-elvin pls do
-```
+* Open the project with [Unity](https://unity.com/)
+* or, play it at [Itch.io](https://salty-pizza.itch.io/rooter)
 
 ## Team Members
 * [Elvin Nicholson](https://github.com/ElvinNicholson)
