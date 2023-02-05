@@ -8,7 +8,7 @@ public class RootManager : MonoBehaviour
 {
     [SerializeField] private WaterAndMineral map_generation;
 
-    private Vector3 mouse_pos;
+    [SerializeField] private Vector3 mouse_pos;
     [SerializeField] private Vector3Int cell_pos;
 
     [SerializeField] private Tilemap tilemap;
@@ -43,12 +43,24 @@ public class RootManager : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && can_draw)
         {
-            mouse_pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            cell_pos = tilemap.WorldToCell(mouse_pos);
-            if ((cell_pos.y < 21))
+            if (!has_drawn)
             {
-                DrawCircle(cell_pos);
-                has_drawn = true;
+                mouse_pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                cell_pos = tilemap.WorldToCell(mouse_pos);
+                if ((16 < cell_pos.y) && (cell_pos.y < 21) && (-4 < cell_pos.x) && (cell_pos.x < 4))
+                {
+                    DrawCircle(cell_pos);
+                    has_drawn = true;
+                }
+            }
+            else
+            {
+                mouse_pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                cell_pos = tilemap.WorldToCell(mouse_pos);
+                if ((cell_pos.y < 21))
+                {
+                    DrawCircle(cell_pos);
+                }
             }
         }
         else if (Input.GetMouseButtonUp(0))
