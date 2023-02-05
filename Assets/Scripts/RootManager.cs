@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class RootManager : MonoBehaviour
 {
-    private Vector3 old_mouse_pos;
+    [SerializeField] private WaterAndMineral map_generation;
+
     private Vector3 mouse_pos;
     [SerializeField] private Vector3Int cell_pos;
 
@@ -23,12 +25,13 @@ public class RootManager : MonoBehaviour
     private bool can_draw;
     [HideInInspector] public bool has_drawn;
 
+    [SerializeField] private Text score;
+
+    public int water_found;
+
     private void Start()
     {
-        current_stamina = max_stamina;
-        old_mouse_pos = tilemap.CellToWorld(new Vector3Int(0, 21, 0));
-        can_draw = true;
-        has_drawn = false;
+        ResetTilemap();
     }
 
     private void Update()
@@ -42,10 +45,9 @@ public class RootManager : MonoBehaviour
         {
             mouse_pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             cell_pos = tilemap.WorldToCell(mouse_pos);
-            if ((cell_pos.y < 21) && (mouse_pos.y < old_mouse_pos.y) && (Mathf.Abs(Mathf.Abs(old_mouse_pos.x) - Mathf.Abs(mouse_pos.x)) < 5))
+            if ((cell_pos.y < 21))
             {
                 DrawCircle(cell_pos);
-                old_mouse_pos = mouse_pos;
                 has_drawn = true;
             }
         }
@@ -74,6 +76,8 @@ public class RootManager : MonoBehaviour
                         if (current_tile == water)
                         {
                             ReplaceAdjacentTilesAs(tile_pos, water, water_claimed);
+                            water_found += 1;
+                            score.text = "SCORE: " + water_found;
                             Debug.Log("FOUND WATER");
                         }
                         else if (current_tile == mineral)
@@ -117,9 +121,11 @@ public class RootManager : MonoBehaviour
     public void ResetTilemap()
     {
         tilemap.ClearAllTiles();
+        map_generation.GenerateTiles();
         current_stamina = max_stamina;
-        old_mouse_pos = tilemap.CellToWorld(new Vector3Int(0, 21, 0));
         can_draw = true;
         has_drawn = false;
+        water_found = 0;
+        score.text = "SCORE: " + water_found;
     }
 }

@@ -10,9 +10,6 @@ public class WaterAndMineral : MonoBehaviour
     private Vector3Int next_cell_pos;
     private Vector3Int after_cell_pos;
 
-    bool is_spawn_left;
-    bool is_spawn_up;
-
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private TileBase water;
     //[SerializeField] private TileBase rock;
@@ -60,13 +57,18 @@ public class WaterAndMineral : MonoBehaviour
     void Start()
     {
         //DrawOrigin();
-        DrawDivider();
+        //DrawDivider();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown("1"))
+
+    }
+
+    private void DebugInputs()
+    {
+        if (Input.GetKeyDown("1"))
         {
             GenerateObjectSet(1);
         }
@@ -91,7 +93,7 @@ public class WaterAndMineral : MonoBehaviour
             DrawSquare(after_cell_pos, 0);
         }
 
-        if(Input.GetKeyDown("g"))
+        if (Input.GetKeyDown("g"))
         {
             randomPositionX = -53;
             randomPositionY = Random.Range(minimum_rand_y, maximum_rand_y - height);
@@ -99,6 +101,21 @@ public class WaterAndMineral : MonoBehaviour
             cell_pos = new Vector3Int(randomPositionX, randomPositionY);
             DrawSquare(cell_pos, 1);
         }
+    }
+
+    public void GenerateTiles()
+    {
+        GenerateObjectSet(1);
+        DrawSquare(next_cell_pos, 1);
+        DrawSquare(after_cell_pos, 0);
+
+        GenerateObjectSet(2);
+        DrawSquare(next_cell_pos, 1);
+        DrawSquare(after_cell_pos, 0);
+
+        GenerateObjectSet(3);
+        DrawSquare(next_cell_pos, 1);
+        DrawSquare(after_cell_pos, 0);
     }
 
     private void GenerateObjectSet(int containerNumber)
